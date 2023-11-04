@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style media="screen">
+        h1 {
+          text-align : center;
+          font-family: 'Jua', sans-serif;
+          font-size : 40px;
+        }
+        h3 {
+          text-align :left;
+          font-family: 'Jua', sans-serif;
+          font-size : 20px;
+        }
+    </style>
+    <style type="text/css">
+      table {
+       width : 90%;
+       border-spacing: 0px 10px;
+}
+th, td {
+        border : 1px solid black;
+        text-align : center;
+        font-size : 20px;
+}
+
+    </style>
+    <meta charset="utf-8">
+    <title>랜덤 좌석 배정 프로그램</title>
+  </head>
+  <body>
+    <h1>랜덤 좌석 배정 프로그램</h1>
+    <h3>제작자: 20704권강민,20720박형준,20727이선호</h3>
+    <div id="line1" style="width:33%; float:left; ">
+      <script type="text/javascript">
+        document.write('<table>');
+            for (i = 0; i < 6; i++) {
+              document.write('<tr>');
+                for (j = 0; j < 2; j++) {
+                  document.write('<td>' + "O" + '</td>');
+                }
+              document.write('</tr>')
+            }
+         document.write('</table><br/>');
+      </script>
+    </div>
+
+    <div id="line2" style="width:33%; float:left;">
+      <script type="text/javascript">
+        document.write('<table>');
+            for (i = 7; i < 13; i++) {
+              document.write('<tr>');
+                for (j = 0; j < 2; j++) {
+                  document.write('<td>' + "O" + '</td>');
+                }
+              document.write('</tr>')
+            }
+         document.write('</table><br/>');
+      </script>
+    </div>
+
+    <div id="line3" style="width:33%; float:left;">
+      <script type="text/javascript">
+        document.write('<table>');
+            for (i = 14; i < 20; i++) {
+              document.write('<tr>');
+                for (j = 0; j < 2; j++) {
+                  document.write('<td>' + "O" + '</td>');
+                }
+              document.write('</tr>')
+            }
+         document.write('</table><br/>');
+      </script>
+      <script>
+        function showTable() {
+        var line1 =  document.getElementById("line1");
+        var line2 =  document.getElementById("line2");
+        var line3 =  document.getElementById("line3");
+
+        var table1 = "";
+        var table2 = "";
+        var table3 = "";
+
+
+      //첫번째 분단(테이블)
+        table1 += "<table>";
+            for (i = 0; i < 6; i++) {
+              table1 += "<tr>";
+                for (j = 0; j < 2; j++) {
+                  table1 += "<td> " + seat[2 * i + j] + "</td>";
+                }
+                table1 += "</tr>";
+            }
+           table1 += "</table></br>";
+           line1.innerHTML = table1;
+
+      //두번째 분단(테이블)
+          table2 += "<table>";
+             for (i = 6; i < 12; i++) {
+                table2 += "<tr>";
+                 for (j = 0; j < 2; j++) {
+                   table2 += "<td> " + seat[2 * i + j] + "</td>";
+                 }
+                 table2 += "</tr>";
+             }
+            table2 += "</table></br>";
+            line2.innerHTML = table2;
+      //세번째 분단(테이블)
+            table3 += "<table>";
+               for (i = 12; i < 18; i++) {
+                  table3 += "<tr>";
+                   for (j = 0; j < 2; j++) {
+                     table3 += "<td> " + seat[2 * i + j] + "</td>";
+                   }
+                   table3 += "</tr>";
+               }
+              table3 += "</table></br>";
+              line3.innerHTML = table3;
+      }
+      </script>
+      <script>
+        var seat = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+
+function randomSeat(num) {
+  var student = num;
+
+  var i = 0;
+  var j = 0;
+  var max = num;
+
+  for (i = 0; i < student; i++) {
+    seat[i] = Math.floor(Math.random() * max) + 1;
+    // 1~num까지의 수를 랜덤하게 뽑음
+    // Math.floor() : 소수점 이하를 버림한다.
+
+    //Check the overlap
+    for (j = 0; j < i; j++) {
+      if (seat[i] == seat[j]) i--;
+    }
+  }
+  showTable();
+}
+      </script>
+    </div>   
+  </body>
+
+<bottom>
+  <style type="text/css">
+    input[type=button] {
+          background-color: #55bd7e;
+          border: none;
+          color: white;
+          padding: 10px 25px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          font-family: 'Jua', sans-serif;
+}
+  </style>
+  <input type="button" id ="selected" name="random" value="좌석 배정"  onclick="
+      if(document.querySelector('#selected').value === '좌석 배정'){
+          randomSeat(36);
+          document.querySelector('#selected').value = '다시 하기';
+      } else {
+        randomSeat(36);
+      }
+  ">
+</bottom>
+ 
+ 
